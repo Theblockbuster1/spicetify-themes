@@ -1322,6 +1322,7 @@ button#player-button-repeat,
 #view-now-playing.expanded {
     bottom: calc(var(--bar-height) + var(--main-gap));
     left: var(--sidebar-width);
+    border-top-right-radius: var(--main-corner-radius);
 }
 
 #view-now-playing a.image.large figure,
@@ -1333,6 +1334,7 @@ button#player-button-repeat,
     width: var(--left-sidebar-item-height);
     height: var(--left-sidebar-item-height);
     background-size: cover;
+    background-position: center;
     border-radius: 50%;
     margin: 0 auto;
 }
@@ -1511,4 +1513,15 @@ button[data-button=add-recommendation] {
     background: linear-gradient(to top, var(--modspotify_secondary_bg) 10%, transparent);
     z-index: 3;
     pointer-events: none;
+}
+
+.progress-bar .handle.prog-tooltip {
+    min-width: 100px;
+    width: unset;
+    height: 25px;
+    top: -35px;
+    padding: 0 5px;
+    border-radius: 4px;
+    text-align: center;
+    color: var(--modspotify_secondary_fg);
 }
