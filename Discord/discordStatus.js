@@ -2,11 +2,9 @@ var prevProgressBarTime; //remember progress time from previous refresh
 
 //Create status icons and start observing after friends are loaded
 waitForElement([".main-buddyFeed-addFriendPlaceholder", ".main-buddyFeed-avatarContainer", ".main-avatar-avatar", ".main-buddyFeed-artistAndTrackName", ".playback-bar__progress-time"], (queries) => {
-    prevProgressBarTime = document.getElementsByClassName("playback-bar__progress-time")[0].innerHTML; //save progress time
-    
     CreateStatusIcons(); //create status
 
-    setInterval(RefreshStatus, 61000); //refresh statuses every 61sec (61 so it's less propable to prevProgressBarTime and currProgressBarTime will be the same during playback)
+    setInterval(RefreshStatus, 31000); //refresh statuses every 61sec (31 so it's less propable to prevProgressBarTime and currProgressBarTime will be the same during playback)
 });
 
 
@@ -31,84 +29,105 @@ function RefreshStatus()
 {
     let online = document.getElementsByClassName("spoticon-now-playing-active-16"); //all currently listening friends
     let timestamps = document.getElementsByClassName("main-buddyFeed-timestamp"); //all timestamps
-    let avatars = document.getElementsByClassName("main-avatar-avatar"); //all avatars
+
+    let allAvatars = document.getElementsByClassName("main-avatar-avatar"); //all avatars
+    let friendsAvatars = []; //friends avatars
+    let userAvatars = []; //user avatar
+
     let currProgressBarTime = document.getElementsByClassName("playback-bar__progress-time")[0].innerHTML; //progress time bar
 
-    for(i=0; i<avatars.length; i++)
+    //cycle through all avatars
+    for(i=0; i<allAvatars.length; i++)
     {
-        //user avatar
-        if(i == 0)
+        //find friends avatars
+        if(allAvatars[i].parentNode.classList.contains("main-buddyFeed-avatarContainer"))
         {
-            //listening, set online
-            if(currProgressBarTime != prevProgressBarTime) //if progress time changed from previous refresh set user icon to online (listening)
-            {
-                //console.log(i + " " + avatars[i].title + " online");
-
-                let statusIcons = avatars[i].getElementsByClassName("discord-status");
-                if(statusIcons.length > 0)
-                {
-                    statusIcons[0].className = 'discord-status online';
-                }
-
-                prevProgressBarTime = currProgressBarTime;
-            }
-
-            //progress time didn't change, not listening, set away
-            else
-            {
-                //console.log(i + " " + avatars[i].title + " away");
-
-                let statusIcons = avatars[i].getElementsByClassName("discord-status");
-                if(statusIcons.length > 0)
-                {
-                    statusIcons[0].className = 'discord-status away';
-                }
-            }
+            friendsAvatars.push(allAvatars[i]); 
         }
 
-        //set online if is listening
-        else if(online.length > i-1) //include all online and user profile (i-1 allows script to include users profile in status appending)
+        //find user avatars
+        else if(allAvatars[i].parentNode.classList.contains("main-userWidget-box")) 
         {
-            //console.log(i + " " + avatars[i].title + " online");
+            userAvatars.push(allAvatars[i]); 
+        }
+    }
 
-            let statusIcons = avatars[i].getElementsByClassName("discord-status");
+    //friends avatars
+    for(i=0; i<friendsAvatars.length; i++)
+    {
+        //set online if is listening
+        if(online.length > i)
+        {
+            //console.log(i + " " + friendsAvatars[i].title + " online");
+
+            let statusIcons = friendsAvatars[i].getElementsByClassName("discord-status");
             if(statusIcons.length > 0)
             {
                 statusIcons[0].className = 'discord-status online';
             }
 
-            avatars[i].style.opacity = 1; 
+            friendsAvatars[i].style.opacity = 1; 
         }
 
         else
         {
-            //set away if doesn't listen for less than an hour
-            if(timestamps[i-1].children[0].innerHTML.includes("min") && timestamps[i-1].children.length > 0) //i-1 allows script to include users profile in status appending
+            //set away if didn't listen for less than an hour
+            if(timestamps[i].children[0].innerHTML.includes("min"))
             {
-                //console.log(i + " " + avatars[i].title + " away");
+                //console.log(i + " " + friendsAvatars[i].title + " away");
 
-                let statusIcons = avatars[i].getElementsByClassName("discord-status");
+                let statusIcons = friendsAvatars[i].getElementsByClassName("discord-status");
                 if(statusIcons.length > 0)
                 {
                     statusIcons[0].className = 'discord-status away';
                 }
 
-                avatars[i].style.opacity = 1; 
+                friendsAvatars[i].style.opacity = 1; 
             }
 
             //set offline
             else
             {
-                //console.log(i + " " + avatars[i].title + " offline");
+                //console.log(i + " " + friendsAvatars[i].title + " offline");
                 
-                let statusIcons = avatars[i].getElementsByClassName("discord-status");
+                let statusIcons = friendsAvatars[i].getElementsByClassName("discord-status");
                 if(statusIcons.length > 0)
                 {
                     statusIcons[0].className = 'discord-status hidden';
                 }
 
-                avatars[i].style.opacity = 0.3; //gray out offline friends
+                friendsAvatars[i].style.opacity = 0.3; //gray out offline friends
             }        
+        }
+    }
+
+    //user avatars
+    for(i=0; i<userAvatars.length; i++)
+    {
+        //listening, set online
+        if(currProgressBarTime != prevProgressBarTime) //if progress time changed from previous refresh set user icon to online (listening)
+        {
+            //console.log(i + " " + userAvatars[i].title + " online");
+
+            let statusIcons = userAvatars[i].getElementsByClassName("discord-status");
+            if(statusIcons.length > 0)
+            {
+                statusIcons[0].className = 'discord-status online';
+            }
+
+            prevProgressBarTime = currProgressBarTime;
+        }
+
+        //progress time didn't change, not listening, set away
+        else
+        {
+            //console.log(i + " " + userAvatars[i].title + " away");
+
+            let statusIcons = userAvatars[i].getElementsByClassName("discord-status");
+            if(statusIcons.length > 0)
+            {
+                statusIcons[0].className = 'discord-status away';
+            }
         }
     }
 }
