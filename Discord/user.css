@@ -1,21 +1,27 @@
+:root {
+    --player-bar-height: 105px;
+}
+
 .main-rootlist-rootlistDividerGradient {
-    background: linear-gradient(180deg, var(--modspotify_main_bg), transparent);
+    background: unset;
 }
 
 input {
     background-color: unset !important;
-    border-bottom: solid 1px var(--modspotify_main_fg) !important;
+    border-bottom: solid 1px var(--spice-text) !important;
     border-radius: 0 !important;
     padding: 6px 10px 6px 48px;
-    color: var(--modspotify_main_fg) !important;
+    color: var(--spice-text) !important;
 }
 
-.x-833-searchInput-searchInputSearchIcon {
-    color: var(--modspotify_main_fg) !important;
+.x-searchInput-searchInputSearchIcon,
+.x-searchInput-searchInputClearButton {
+    color: var(--spice-text) !important;
 }
 
 .main-home-homeHeader,
-.x-441-entityHeader-overlay,
+.x-entityHeader-overlay,
+.x-actionBarBackground-background,
 .main-actionBarBackground-background,
 .main-entityHeader-overlay,
 .main-entityHeader-backgroundColor
@@ -32,16 +38,22 @@ input {
     display: none;
 }
 
-/* Topbar visibility bug */
-.main-topBar-topbarContent:not(.main-topBar-topbarContentFadeIn)>* {
-    opacity: unset !important;
-}
-.main-entityHeader-topbarContent:not(.main-entityHeader-topbarContentFadeIn)>* {
-    opacity: 0 !important;
+.connect-device-list {
+    margin: 0px -5px;
 }
 
-.main-entityHeader-shadow {
-    box-shadow: 0 04px 20px #21212130;
+/* Remove Topbar background colour */
+.main-topBar-background {
+    background-color: unset !important;
+}
+.main-topBar-overlay {
+    background-color: #292B2F;
+}
+
+.main-entityHeader-shadow,
+.main-contextMenu-menu,
+.connect-device-list-container {
+    box-shadow: 0 4px 20px #21212130;
 }
 
 .main-trackList-playingIcon {
@@ -50,14 +62,6 @@ input {
 
 span.artist-artistVerifiedBadge-badge svg:nth-child(1) {
     fill: black;
-}
-
-.main-playPauseButton-button {
-    background-color: var(--modspotify_indicator_fg_and_button_bg);
-}
-
-.main-navBar-navBarLinkActive {
-    background-color: rgba(var(--modspotify_rgb_indicator_fg_and_button_bg),1);
 }
 
 /* Full window artist background */
@@ -80,7 +84,7 @@ span.artist-artistVerifiedBadge-badge svg:nth-child(1) {
 }
 
 .main-entityHeader-background.main-entityHeader-overlay:after {
-    background-image: linear-gradient(transparent,transparent),linear-gradient(var(--modspotify_main_bg), var(--modspotify_main_bg));
+    background-image: linear-gradient(transparent,transparent),linear-gradient(var(--spice-main), var(--spice-main));
 }
 
 .artist-artistOverview-overview .main-entityHeader-withBackgroundImage h1 {
@@ -88,11 +92,56 @@ span.artist-artistVerifiedBadge-badge svg:nth-child(1) {
     line-height: 175px !important;
 }
 
+/** Hightlight selected playlist */
+.main-rootlist-rootlistItemLink.main-rootlist-rootlistItemLinkActive {
+    background: #393C43;
+    border-radius: 4px;
+    padding: 0 10px;
+    margin: 0 5px 0 -10px;
+}
+
+.main-navBar-navBarLinkActive {
+    background: #393C43;
+}
+
+.main-contextMenu-menu {
+    background-color: #393C43;
+}
+
+.main-contextMenu-menuHeading,
+.main-contextMenu-menuItemButton,
+.main-contextMenu-menuItemButton:not(.main-contextMenu-disabled):focus,
+.main-contextMenu-menuItemButton:not(.main-contextMenu-disabled):hover,
+.main-rootlist-textWrapper,
+.main-type-viola {
+    color: white !important;
+}
+
+/** Cards */
+.main-cardImage-imageWrapper {
+    background-color: transparent;
+}
+
+.main-rootlist-rootlistDivider {
+    background-color: unset;
+}
+
+.main-nowPlayingBar-nowPlayingBar {
+    height: var(--player-bar-height);
+}
+
 /*Friends*/
 .main-buddyFeed-expanded
 {
     padding-top: 25px;
     background-color: #2F3136 !important;
+}
+
+.main-buddyFeed-activityMetadata .main-buddyFeed-artistAndTrackName a,
+.main-buddyFeed-activityMetadata .main-buddyFeed-username a,
+.main-buddyFeed-activityMetadata .main-buddyFeed-playbackContextLink
+{
+    color:#8E9197 !important;
 }
 
 /*Left sidebar*/
@@ -135,9 +184,9 @@ span.artist-artistVerifiedBadge-badge svg:nth-child(1) {
 }
 
 /*Other*/
-.main-playPauseButton-button
-{
-    color: white !important;
+.main-playPauseButton-button {
+    background-color: var(--spice-button);
+    color: white;
 }
 
 .progress-bar__fg
