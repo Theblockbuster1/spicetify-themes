@@ -40,14 +40,6 @@ input {
     opacity: 0 !important;
 }
 
-/* Remove Topbar background colour */
-.main-topBar-background {
-    background-color: unset !important;
-}
-.main-topBar-overlay {
-    background-color: var(--modspotify_main_bg);
-}
-
 .main-entityHeader-shadow {
     box-shadow: 0 04px 20px #21212130;
 }
@@ -97,10 +89,6 @@ span.artist-artistVerifiedBadge-badge svg:nth-child(1) {
 }
 
 /*Friends*/
-.main-buddyFeed-buddyFeedRoot, .main-buddyFeed-buddyFeed .main-buddyFeed-expanded, .main-buddyFeed-friendsFeedContainer
-{
-	background-color: #2F3136;
-}
 .main-buddyFeed-expanded
 {
     padding-top: 25px;
@@ -108,11 +96,6 @@ span.artist-artistVerifiedBadge-badge svg:nth-child(1) {
 }
 
 /*Left sidebar*/
-.Root__nav-bar
-{
-	background-color: #2F3136;
-}
-
 .main-rootlist-rootlistDividerGradient, .main-rootlist-rootlistDivider
 {
     opacity: 0;
@@ -127,13 +110,6 @@ span.artist-artistVerifiedBadge-badge svg:nth-child(1) {
 {
     color: #858A91;
 }
-
-/*Top bar*/
-/*.Root__top-bar
-{
-	border-bottom: solid 1px black;
-    z-index: 10;
-}*/
 
 /*Now playing color*/
 .main-trackList-rowTitle, .standalone-ellipsis-one-line, .main-type-ballad
@@ -159,9 +135,14 @@ span.artist-artistVerifiedBadge-badge svg:nth-child(1) {
 }
 
 /*Other*/
-.main-playButton-PlayButton
+.main-playPauseButton-button
 {
-    color: black !important;
+    color: white !important;
+}
+
+.progress-bar__fg
+{
+    background-color: #FFFFFF !important;
 }
 
 /*Discord status*/

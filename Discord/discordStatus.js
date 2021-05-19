@@ -39,6 +39,12 @@ function RefreshStatus()
     //cycle through all avatars
     for(i=0; i<allAvatars.length; i++)
     {
+        //Remove default badges
+        if(allAvatars[i].classList.contains("main-avatar-withBadge"))
+        {
+            allAvatars[i].classList.remove("main-avatar-withBadge");
+        }
+
         //find friends avatars
         if(allAvatars[i].parentNode.classList.contains("main-buddyFeed-avatarContainer"))
         {
