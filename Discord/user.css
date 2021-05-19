@@ -160,6 +160,12 @@ span.artist-artistVerifiedBadge-badge svg:nth-child(1) {
     color: #858A91;
 }
 
+/*Hide scrollbars*/
+.main-rootlist-rootlistPlaylistsScrollNode .os-scrollbar, .main-buddyFeed-scrollableArea .os-scrollbar
+{
+    visibility: hidden;
+}
+
 /*Now playing color*/
 .main-trackList-rowTitle, .standalone-ellipsis-one-line, .main-type-ballad
 {

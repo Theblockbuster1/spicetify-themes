@@ -4,7 +4,7 @@ var prevProgressBarTime; //remember progress time from previous refresh
 waitForElement([".main-buddyFeed-addFriendPlaceholder", ".main-buddyFeed-avatarContainer", ".main-avatar-avatar", ".main-buddyFeed-artistAndTrackName", ".playback-bar__progress-time"], (queries) => {
     CreateStatusIcons(); //create status
 
-    setInterval(RefreshStatus, 31000); //refresh statuses every 61sec (31 so it's less propable to prevProgressBarTime and currProgressBarTime will be the same during playback)
+    setInterval(RefreshStatus, 9500); //refresh statuses every 9.5sec (9.5 so it's less propable to prevProgressBarTime and currProgressBarTime will be the same during playback)
 });
 
 
